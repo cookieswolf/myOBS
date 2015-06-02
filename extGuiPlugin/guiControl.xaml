@@ -21,10 +21,11 @@
     </UserControl.Resources>
     <Grid Width="1930" Height="1090">
         <Grid.Effect>
-            <DropShadowEffect Color="#FFB09C9C" BlurRadius="13"/>
+            <DropShadowEffect Color="#FFB09C9C" BlurRadius="29"/>
         </Grid.Effect>
         <Button x:Name="butCek" Style="{StaticResource GlassButton}" Content="Çek!" HorizontalAlignment="Left" Margin="76,58,0,0" VerticalAlignment="Top" Width="240" Height="240" FontSize="40" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" FontFamily="BolsterBold" Click="Button_Click"/>
-        <Button Style="{StaticResource GlassButton}" Content="Yolla!" HorizontalAlignment="Left" Margin="76,370,0,0" VerticalAlignment="Top" Width="240" Height="240" FontSize="40" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" FontFamily="BolsterBold" Click="Button_Click_1"/>
-        <TextBox x:Name="tbMail" HorizontalAlignment="Left" Height="85" Margin="729,213,0,0" TextWrapping="Wrap" Text="hasan.erdemir.32@gmail.com" VerticalAlignment="Top" Width="763" FontSize="40" FontFamily="BRADDON BoldItalic"/>
+        <Button x:Name="butYolla" Style="{StaticResource GlassButton}" Content="Yolla!" HorizontalAlignment="Left" Margin="76,652,0,0" VerticalAlignment="Top" Width="240" Height="240" FontSize="40" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" FontFamily="BolsterBold" Click="Button_Click_1"/>
+        <TextBox x:Name="tbMail" HorizontalAlignment="Left" Height="85" Margin="387,749,0,0" TextWrapping="Wrap" Text="hasan.erdemir.32@gmail.com" VerticalAlignment="Top" Width="919" FontSize="40" FontFamily="BRADDON BoldItalic"/>
+        <Button x:Name ="butDegistir" Style="{StaticResource GlassButton}" Content="Değiştir" HorizontalAlignment="Left" Margin="76,331,0,0" VerticalAlignment="Top" Width="240" Height="240" FontSize="40" FontFamily="Calibri Light" FontWeight="Bold" Click="butDegistir_Click"/>
     </Grid>
 </UserControl>

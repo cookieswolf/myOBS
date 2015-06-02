@@ -65,4 +65,8 @@ namespace CLROBS
 	{
 		return gcnew System::String(::API->GetLastOutputFile().Array());
 	}
+	void API::SetSourceRender(System::String^ name, bool render)
+	{
+		::API->SetSourceRender(ToWString(name).c_str(), render);
+	}
 }

@@ -52,5 +52,6 @@ namespace CLROBS
 		void StartStopRecording();
 		bool GetRecording();
 		System::String^ GetLastOutputFile();
+		void SetSourceRender(System::String^ name, bool render);
     };
 };

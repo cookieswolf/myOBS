@@ -13,10 +13,7 @@ using System.Drawing;
 namespace guiPlugin
 {
 
-    public static class  Funcs
-    {
-        public static bool GetRecording() { return API.Instance.GetRecording(); }
-    }
+
     public class guiPluginHook : AbstractPlugin
     {
         

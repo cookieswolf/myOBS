@@ -31,13 +31,14 @@ namespace guiPlugin
         Timer t;
         System.Threading.Thread WaiterThread;
         string FilePath;
-
+        int resim;
+        const int RESIM = 3;
         public guiControl()
         {
             InitializeComponent();
             t = new Timer();
             t.Elapsed += t_Elapsed;
-            
+            resim = 0;
             
             //this.Dispatcher.Invoke(GetRec);
             //recording = DllHelper.COBSGetRecording();
@@ -91,14 +92,24 @@ namespace guiPlugin
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if (FilePath != null)
-            { 
-                FileInfo fi= new FileInfo(FilePath);
+            {
+                FileInfo fi = new FileInfo(FilePath);
                 if (fi.Exists)
                 {
                     //MessageBox.Show("YEAH!");
-                    Mailing m =new Mailing()                       ;
+                    Mailing m = new Mailing();
                     m.SendMail("smtp.gmail.com", 587, "btmtest16@gmail.com", "TestBtm16", "btmtest16@gmail.com", tbMail.Text, "greetings", "hi", FilePath);
                 }
+            }
+
+        }
+
+        private void butDegistir_Click(object sender, RoutedEventArgs e)
+        {
+            resim = ++resim % RESIM + 1;
+            for (int i = 1; i <= RESIM; i++)
+            {
+                API.Instance.SetSourceRender(string.Format("Fon {0}", i), i==resim);
             }
 
         }
