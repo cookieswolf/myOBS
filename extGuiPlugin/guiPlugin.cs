@@ -57,8 +57,8 @@ namespace guiPlugin
             //Form window = new Form();
 
 
-
-
+            API.Instance.SetFullscreen(true);
+            API.Instance.StartStopRecordingReplayBuffer();
             //f.Show();
             return true;
         }

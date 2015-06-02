@@ -29,20 +29,55 @@ namespace guiPlugin
     public partial class guiControl : UserControl
     {
         Timer t;
+        Timer count;
+        int countTimer;
         System.Threading.Thread WaiterThread;
         string FilePath;
         int resim;
-        const int RESIM = 3;
+        const int RESIM = 6;
+        const int TIMERMAX = 5;
         public guiControl()
         {
             InitializeComponent();
             t = new Timer();
+            count = new Timer();
+            count.Elapsed += count_Elapsed;
             t.Elapsed += t_Elapsed;
             resim = 0;
             
             //this.Dispatcher.Invoke(GetRec);
             //recording = DllHelper.COBSGetRecording();
             
+        }
+
+        void count_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (countTimer >= 0)
+            {
+                for (int i = 1; i <= TIMERMAX; i++)
+                {
+                    API.Instance.SetSourceRender(string.Format("T{0}", i), i == countTimer);
+                }
+                count.Interval = 1000;
+                countTimer--;
+                count.Start();
+            }
+            else
+            {
+                count.Stop();
+                //for (int i = 1; i <= TIMERMAX; i++)
+                //{
+                //    API.Instance.SetSourceRender(string.Format("T{0}", 1), false);
+                //}
+                API.Instance.StartStopRecording();
+                //this.butCek.IsEnabled = false;
+                WaiterThread = new System.Threading.Thread(WaitRec);
+                WaiterThread.Start();
+               
+                //now start recording
+
+            }
+            //throw new NotImplementedException();
         }
         
         void t_Elapsed(object sender, ElapsedEventArgs e)
@@ -78,10 +113,13 @@ namespace guiPlugin
             if (!API.Instance.GetRecording())
             {
                 t.Interval = 10100;
-                API.Instance.StartStopRecording();
+                count.Interval = 1000;
+                countTimer = TIMERMAX;
+                count.Start();
+                //API.Instance.StartStopRecording();
                 this.butCek.IsEnabled = false;
-                WaiterThread = new System.Threading.Thread(WaitRec);
-                WaiterThread.Start();
+                //WaiterThread = new System.Threading.Thread(WaitRec);
+                //WaiterThread.Start();
 
                 
                 //MessageBox.Show("Çek basıldı");
@@ -106,7 +144,10 @@ namespace guiPlugin
 
         private void butDegistir_Click(object sender, RoutedEventArgs e)
         {
-            resim = ++resim % RESIM + 1;
+            if (resim == RESIM)
+                resim = 1;
+            else
+                resim++;
             for (int i = 1; i <= RESIM; i++)
             {
                 API.Instance.SetSourceRender(string.Format("Fon {0}", i), i==resim);
