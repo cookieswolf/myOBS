@@ -53,5 +53,7 @@ namespace CLROBS
 		bool GetRecording();
 		System::String^ GetLastOutputFile();
 		void SetSourceRender(System::String^ name, bool render);
+		void SetFullscreen(bool fullscreen);
+		void StartStopRecordingReplayBuffer();
     };
 };

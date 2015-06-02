@@ -69,4 +69,13 @@ namespace CLROBS
 	{
 		::API->SetSourceRender(ToWString(name).c_str(), render);
 	}
+	void API::SetFullscreen(bool fullscreen)
+	{
+		::API->SetFullscreen(fullscreen);
+	}
+
+	void API::StartStopRecordingReplayBuffer()
+	{
+		::API->StartStopRecordingReplayBuffer();
+	}
 }

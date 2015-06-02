@@ -54,6 +54,8 @@ public:
     virtual void EnterSceneMutex()=0;
     virtual void LeaveSceneMutex()=0;
 
+	virtual void SetFullscreen(bool fullscreen)=0;
+
     virtual void RegisterSceneClass(CTSTR lpClassName, CTSTR lpDisplayName, OBSCREATEPROC createProc, OBSCONFIGPROC configProc)=0;
     virtual void RegisterImageSourceClass(CTSTR lpClassName, CTSTR lpDisplayName, OBSCREATEPROC createProc, OBSCONFIGPROC configProc)=0;
 

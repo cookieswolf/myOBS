@@ -508,6 +508,10 @@ public:
 		return App->lastOutputFile;
 	}
 
+	virtual void SetFullscreen(bool fullscreen)
+	{
+		App->SetFullscreenMode(fullscreen);
+	}
 
     virtual void RegisterSceneClass(CTSTR lpClassName, CTSTR lpDisplayName, OBSCREATEPROC createProc, OBSCONFIGPROC configProc)
     {
