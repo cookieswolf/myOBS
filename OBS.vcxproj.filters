@@ -233,9 +233,6 @@
     <None Include="ui\test2\test.ico">
       <Filter>Resources</Filter>
     </None>
-    <None Include="ui\test2\test48.ico">
-      <Filter>Resources</Filter>
-    </None>
     <None Include="rundir\shaders\DownscaleYUV1.5.pShader">
       <Filter>Shaders</Filter>
     </None>
@@ -292,5 +289,10 @@
     <ResourceCompile Include="OBS.rc">
       <Filter>Resources</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ui\test2\btm-logo.ico">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

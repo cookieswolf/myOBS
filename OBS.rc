@@ -849,7 +849,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "ui\\test2\\test.ico"
+IDI_ICON1               ICON                    "ui\\test2\\btm-logo.ico"
 IDI_SOUND_MIC           ICON                    "ui\\mic2.ico"
 IDI_SOUND_MIC_MUTED     ICON                    "ui\\mic2-muted.ico"
 IDI_SOUND_DESKTOP       ICON                    "ui\\speaker.ico"

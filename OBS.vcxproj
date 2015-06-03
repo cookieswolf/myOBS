@@ -343,7 +343,6 @@
     <None Include="ui\speaker.ico" />
     <None Include="ui\test2\recording.ico" />
     <None Include="ui\test2\test.ico" />
-    <None Include="ui\test2\test48.ico" />
     <None Include="rundir\shaders\DownscaleYUV1.5.pShader" />
     <None Include="rundir\shaders\DownscaleYUV2.25.pShader" />
     <None Include="rundir\shaders\DownscaleYUV2.pShader" />
@@ -356,6 +355,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OBS.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ui\test2\btm-logo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

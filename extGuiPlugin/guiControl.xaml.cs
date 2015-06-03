@@ -12,11 +12,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+//using System.Windows.Shapes;
 using System.Windows.Threading;
 using CLROBS;
 using System.IO;
-
+//using Vlc.DotNet.Wpf;
+using Vlc.DotNet.Forms;
+using System.Reflection;
+using extGuiPlugin;
 
 namespace guiPlugin
 {
@@ -30,8 +33,11 @@ namespace guiPlugin
     {
         Timer t;
         Timer count;
+        Timer delayedStart;
+        //VlcControl myControl;
         int countTimer;
         System.Threading.Thread WaiterThread;
+        videoPlay vt;
         string FilePath;
         int resim;
         const int RESIM = 6;
@@ -39,15 +45,30 @@ namespace guiPlugin
         public guiControl()
         {
             InitializeComponent();
+            //myControl = new VlcControl();
+            //System.Windows.Forms.Panel p = new System.Windows.Forms.Panel();
             t = new Timer();
             count = new Timer();
+            delayedStart = new Timer();
             count.Elapsed += count_Elapsed;
             t.Elapsed += t_Elapsed;
+            delayedStart.Elapsed += delayedStart_Elapsed;
+            //delayedStart.Interval = 1000;
+            
             resim = 0;
+            vt = new videoPlay();
+            //wfHost.BringIntoView();
             
-            //this.Dispatcher.Invoke(GetRec);
-            //recording = DllHelper.COBSGetRecording();
             
+            
+        }
+
+        void delayedStart_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            delayedStart.Stop();
+            this.Dispatcher.Invoke((Action)(StartVideo));
+            //vt.Play(FilePath);
+            //throw new NotImplementedException();
         }
 
         void count_Elapsed(object sender, ElapsedEventArgs e)
@@ -92,6 +113,10 @@ namespace guiPlugin
             }
             this.Dispatcher.Invoke((Action)(EnableBut));
             WaiterThread.Abort();
+            delayedStart.Interval = 2000;
+            delayedStart.Start();
+            //vt.Play(FilePath);
+            
         }
         
         private void EnableBut()
@@ -99,6 +124,18 @@ namespace guiPlugin
             this.butCek.IsEnabled = true;
         }
 
+        private void StartVideo()
+        {
+            vt.Play(FilePath);
+            //myControl.Visibility = Visibility.Visible;
+            //myControl.MediaPlayer.
+            //myControl.Play(new Uri(FilePath));
+            //videoPlay.Source = new Uri(FilePath);
+            
+            //videoPlay.IsEnabled = true;
+            //videoPlay.Play();
+            //videoPlay.set = true;
+        }
         private void WaitRec()
         {
             while (!API.Instance.GetRecording())
@@ -107,12 +144,11 @@ namespace guiPlugin
             }
             t.Start();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Cek()
         {
             if (!API.Instance.GetRecording())
             {
-                t.Interval = 10100;
+                t.Interval = 5100;
                 count.Interval = 1000;
                 countTimer = TIMERMAX;
                 count.Start();
@@ -120,11 +156,12 @@ namespace guiPlugin
                 this.butCek.IsEnabled = false;
                 //WaiterThread = new System.Threading.Thread(WaitRec);
                 //WaiterThread.Start();
-
-                
                 //MessageBox.Show("Çek basıldı");
             }
-            
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Cek();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -151,6 +188,31 @@ namespace guiPlugin
             for (int i = 1; i <= RESIM; i++)
             {
                 API.Instance.SetSourceRender(string.Format("Fon {0}", i), i==resim);
+            }
+
+        }
+
+        private void butOyna_Click(object sender, RoutedEventArgs e)
+        {
+            //System.Windows.Forms.OpenFileDialog openFileDialog1= new System.Windows.Forms.OpenFileDialog();
+            //if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //{
+            //    FilePath = openFileDialog1.FileName;
+            //    //vt = new videoPlay();
+            //    //myControl.Size = new System.Drawing.Size(1024, 768);
+            //    //myControl.Play(new Uri(s));
+            //}
+            if (File.Exists(FilePath))
+            {
+                vt.Play(FilePath);
+            }
+            else
+            {
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+                if(MessageBox.Show("Cekim yapilmamis\nSimdi bir Cekime baslamak istermisin?","Hata!",MessageBoxButton.OKCancel)==MessageBoxResult.OK)
+                {
+                    Cek();
+                }
             }
 
         }

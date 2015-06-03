@@ -43,23 +43,17 @@ namespace guiPlugin
                 //  WindowStartupLocation = WindowStartupLocation.Manual
 
             };
-            //System.Windows.MessageBox.Show("TAESr");
-            //window.
+            
 
             window.Top = r.Top;
             window.Left = r.Left;
             window.Width = r.Width;
             window.Height = r.Height;
-            //System.Windows.MessageBox.Show(string.Format("{0} {1}", r.Width, r.Height));
-            //window.RenderSize = new System.Windows.Size(r.Width, r.Height);
-            //window.SizeToContent = SizeToContent.Manual;
-            window.Show();
-            //Form window = new Form();
 
+            window.Show();
 
             API.Instance.SetFullscreen(true);
             API.Instance.StartStopRecordingReplayBuffer();
-            //f.Show();
             return true;
         }
     }
